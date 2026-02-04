@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <title>F.A.C.S – Field Activity Capture System</title>
+
+  <!-- PWA -->
+  <link rel="manifest" href="manifest.json">
+  <meta name="theme-color" content="#000000">
+
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f5f5f5;
+      padding: 16px;
+    }
+    h1 {
+      text-align: center;
+      margin-bottom: 4px;
+    }
+    .subtitle {
+      text-align: center;
+      color: #555;
+      margin-bottom: 20px;
+    }
+    form {
+      background: #ffffff;
+      padding: 16px;
+      border-radius: 8px;
+    }
+    input, select, textarea, button {
+      width: 100%;
+      margin: 8px 0;
+      padding: 10px;
+      font-size: 16px;
+    }
+    label {
+      display: block;
+      margin: 6px 0;
+    }
+    button {
+      background: black;
+      color: white;
+      border: none;
+      border-radius: 4px;
+      font-size: 18px;
+    }
+    footer {
+      text-align: center;
+      font-size: 12px;
+      color: #777;
+      margin-top: 20px;
+    }
+  </style>
+</head>
+
+<body>
+
+<h1>F.A.C.S</h1>
+<div class="subtitle">
+  Field Activity Capture System<br>
+  <small>Built by a rep, for reps</small>
+</div>
+
+<form
+  action="https://docs.google.com/forms/d/e/YOUR_FORM_ID/formResponse"
+  method="POST"
+  enctype="multipart/form-data"
+  target="hidden_iframe">
+
+  <!-- STORE DETAILS -->
+  <input name="entry.STORE_ID" placeholder="Store Name" required>
+  <input name="entry.MANAGER_ID" placeholder="Store Manager Name">
+
+  <!-- GPS (hidden) -->
+  <input type="hidden" name="entry.LAT_ID" id="lat">
+  <input type="hidden" name="entry.LNG_ID" id="lng">
+
+  <h3>Visit Actions</h3>
+  <label><input type="radio" name="entry.PRIORITIES_ID" value="Yes"> Priorities reviewed</label>
+  <label><input type="radio" name="entry.PRIORITIES_ID" value="No"> Not done</label>
+
+  <label><input type="radio" name="entry.STOCKFIX_ID" value="Yes"> Stock Fix completed</label>
+  <label><input type="radio" name="entry.STOCKFIX_ID" value="No"> Not done</label>
+
+  <input name="entry.STOCKNOTE_ID" placeholder="Stock Fix note (optional)">
+
+  <h3>F.I.E.R.C.E (tick what applies)</h3>
+  <label><input type="checkbox" name="entry.FIERCE_ID" value="SOS"> SOS</label>
+  <label><input type="checkbox" name="entry.FIERCE_ID" value="VGP"> VGP</label>
+  <label><input type="checkbox" name="entry.FIERCE_ID" value="DGP"> DGP</label>
+  <label><input type="checkbox" name="entry.FIERCE_ID" value="OSA"> OSA</label>
+  <label><input type="checkbox" name="entry.FIERCE_ID" value="Displays"> Displays</label>
+
+  <h3>Monthly Task Touched</h3>
+  <select name="entry.MONTHLY_ID">
+    <option>None</option>
+    <option>TRAX</option>
+    <option>KBD 11</option>
+    <option>Perfect Store Survey</option>
+    <option>Dis-Chem Survey</option>
+  </select>
+
+  <h3>Photo Evidence (optional)</h3>
+  <input type="file" name="entry.PHOTO_ID" accept="image/*" multiple>
+
+  <textarea name="entry.NOTES_ID" placeholder="Notes / Issues"></textarea>
+
+  <button type="submit">Submit Visit</button>
+</form>
+
+<iframe name="hidden_iframe" style="display:none;"></iframe>
+
+<footer>
+  F.A.C.S is an independent productivity tool created by a field representative.
+  Not an official company system.
+</footer>
+
+<script>
+  navigator.geolocation.getCurrentPosition(
+    function(pos) {
+      document.getElementById("lat").value = pos.coords.latitude;
+      document.getElementById("lng").value = pos.coords.longitude;
+    },
+    function() {
+      alert("Location permission is required for F.A.C.S");
+    }
+  );
+</script>
+
+</body>
+</html>
